@@ -1,5 +1,6 @@
 package ui;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class UserIOConsoleImpl implements UserIO {
@@ -14,7 +15,22 @@ public class UserIOConsoleImpl implements UserIO {
         print(prompt);
         String userInput = scanner.nextLine();
         return userInput;
-    };
+    }
+
+    @Override
+    public BigDecimal readDecimal(String prompt, BigDecimal price) {
+        while (true) {
+            print(prompt);
+            BigDecimal userInput = BigDecimal.valueOf(Long.parseLong(scanner.nextLine().trim()));
+            if ((userInput.compareTo(price)) >= 0){
+                return userInput.subtract(price);
+            } else {
+                System.out.println("Not enough money");
+            }
+        }
+    }
+
+    ;
 
     public int readInt(String prompt){
         print(prompt);
