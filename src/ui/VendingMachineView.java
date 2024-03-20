@@ -46,5 +46,7 @@ public class VendingMachineView {
         }
 
 
-        
+    public void printSuccess(String change) {
+            io.print("Transaction Successful");
+    }
 }
