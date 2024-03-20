@@ -41,7 +41,13 @@ public class VendingMachineController {
                 }
 
                 switch (menuSelection) {
-
+                    case 1:
+                        System.out.println("Ok keep going");
+                        break;
+                    case 2:
+                        menuSelection = 1;
+                        exitMessage();
+                        break;
                     default:
                         unknownCommand();
                 }
