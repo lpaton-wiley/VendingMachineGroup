@@ -1,6 +1,7 @@
 package ui;
 
 import java.util.List;
+import java.util.Map;
 
 public class VendingMachineView {
 
@@ -10,8 +11,9 @@ public class VendingMachineView {
             this.io = io;
         }
 
-        public void printMenuAndGetSelection() {
+        public void printMenuAndGetSelection(Map<String, Integer> inventory) {
             io.print("Main Menu");
+            io.print(inventory.toString());
             // print items and prices
             // ask for money amount
             // ask for selection
