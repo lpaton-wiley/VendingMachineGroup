@@ -2,6 +2,7 @@ package controller;
 
 import dao.NoRemainingInventoryException;
 import dao.VendingMachineDAO;
+import ui.UserIOConsoleImpl;
 import ui.VendingMachineView;
 
 import java.math.BigDecimal;
@@ -10,8 +11,9 @@ public class VendingMachineController {
 
     private VendingMachineView view;
     private VendingMachineDAO dao;
+    private UserIOConsoleImpl io;
 
-    public VendingMachineController(VendingMachineView view, VendingMachineDAO dao) {
+    public VendingMachineController(VendingMachineView view,  VendingMachineDAO dao){
         this.dao = dao;
         this.view = view;
     }
@@ -19,6 +21,10 @@ public class VendingMachineController {
     public void run() {
         boolean keepGoing = true;
         int menuSelection = 0;
+        String input;
+
+        dao.setInventory();
+        
         try {
 
             while (keepGoing) {
@@ -34,33 +40,32 @@ public class VendingMachineController {
                     BigDecimal change = getChange(money, price);
                     view.displaySuccessfulTransaction();
                     view.displayChange(change);
-
                 }
+                
+                input = io.readString("Go Again?");
+
+                switch (input) {
+                    case "y":
+                        System.out.println("Ok keep going");
+                        break;
+                    case "n":
+                        keepGoing = false;
+                        exitMessage();
+                        break;
+                    default:
+                        unknownCommand();
+                }
+
             }
-
-            switch (menuSelection) {
-
-                default:
-                    unknownCommand();
-            }
-
             exitMessage();
-        } catch (NoRemainingInventoryException e) {
+        } catch (NoRemainingInventoryException e){
             view.displayErrorMessage(e.getMessage());
         }
 
     }
 
-    private boolean isPossible(BigDecimal money, BigDecimal price) {
+    private boolean isPossible(BigDecimal money, BigDecimal price){
         return (money.compareTo(price) <= 0);
-    }
-
-    private void exitMessage() {
-        view.displayExitBanner();
-    }
-
-    private void unknownCommand() {
-        view.displayUnknownCommandBanner();
     }
 
     private void successfulTransaction() {
@@ -72,6 +77,13 @@ public class VendingMachineController {
         view.displayChange(change);
         return change;
     }
+
+
+    private void exitMessage() {
+        view.displayExitBanner();
+    }
+
+    private void unknownCommand() {
+        view.displayUnknownCommandBanner();
+    }
 }
-
-
