@@ -45,7 +45,7 @@ public class VendingMachineController {
                         System.out.println("Ok keep going");
                         break;
                     case 2:
-                        menuSelection = 1;
+                        menuSelection = 2;
                         exitMessage();
                         break;
                     default:
