@@ -45,10 +45,10 @@ public class VendingMachineController {
                 input = io.readString("Go Again?");
 
                 switch (input) {
-                    case "n":
+                    case "y":
                         System.out.println("Ok keep going");
                         break;
-                    case "y":
+                    case "n":
                         keepGoing = false;
                         exitMessage();
                         break;
