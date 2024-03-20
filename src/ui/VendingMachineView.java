@@ -45,6 +45,10 @@ public class VendingMachineView {
             io.print(errorMsg);
         }
 
+    public String getUserInput() {
+        return io.readString("Go Again?");
+    }
+
     public void displayChange(BigDecimal change) {
         System.out.println("Change: £ " + change);
     }
