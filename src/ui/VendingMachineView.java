@@ -12,7 +12,7 @@ public class VendingMachineView {
         }
 
         public void printMenuAndGetSelection(Map<String, Integer> inventory) {
-            io.print("Main Menu");
+            io.print("Menu");
             io.print(inventory.toString());
             // print items and prices
             // ask for money amount
