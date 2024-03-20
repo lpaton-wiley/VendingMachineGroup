@@ -6,7 +6,6 @@ import dao.VendingMachineDaoFileImpl;
 import ui.VendingMachineView;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class VendingMachineController {
 
@@ -21,6 +20,9 @@ public class VendingMachineController {
     public void run() {
         boolean keepGoing = true;
         int menuSelection = 0;
+
+        dao.setInventory();
+        
         try {
 
             while (keepGoing) {
@@ -33,8 +35,9 @@ public class VendingMachineController {
                 if (isPossible(money, price)) {
                     dao.buyItem(selection);
                 }
-                else{
+                else {
                     String change = getChange(money, price);
+                    view.printSuccess(change);
                 }
 
                 switch (menuSelection) {
@@ -42,6 +45,7 @@ public class VendingMachineController {
                     default:
                         unknownCommand();
                 }
+
             }
             exitMessage();
         } catch (NoRemainingInventoryException e){

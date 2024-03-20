@@ -20,10 +20,9 @@ public class UserIOConsoleImpl implements UserIO {
     @Override
     public BigDecimal readDecimal(String prompt) {
         print(prompt);
-        return  BigDecimal.valueOf(Long.parseLong(scanner.nextLine().trim()));
+        String number = scanner.nextLine().trim();
+        return new BigDecimal(number);
     }
-
-    ;
 
     public int readInt(String prompt){
         print(prompt);

@@ -22,11 +22,4 @@ public class App {
         // Kick off the Controller
         controller.run();
     }
-
-    public static void main1(String[] args) {
-        VendingMachineDAO vendingMachineDao = new VendingMachineDaoFileImpl();
-        VendingMachineView vendingMachineView = new VendingMachineView(new UserIOConsoleImpl());
-        VendingMachineController controller = new VendingMachineController(vendingMachineView, vendingMachineDao);
-        controller.run();
-    }
 }

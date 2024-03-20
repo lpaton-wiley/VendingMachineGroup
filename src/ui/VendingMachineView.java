@@ -5,6 +5,7 @@ import dto.Item;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class VendingMachineView {
 
@@ -16,7 +17,10 @@ public class VendingMachineView {
 
         public void printMenu(Map<String, Item> inventory) {
             io.print("Menu");
-            io.print(inventory.toString());
+            Set<String> items = inventory.keySet();
+            for (String item: items) {
+                 io.print(item + ": " + inventory.get(item).getPrice().toString());
+            }
 
         }
 
