@@ -46,7 +46,7 @@ public class VendingMachineView {
         }
 
     public String getUserInput() {
-        return io.readString("Go Again?");
+        return io.readString("Would you like to buy something else?");
     }
 
     public void displayChange(BigDecimal change) {

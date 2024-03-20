@@ -2,8 +2,6 @@ package controller;
 
 import dao.NoRemainingInventoryException;
 import dao.VendingMachineDAO;
-import ui.UserIO;
-import ui.UserIOConsoleImpl;
 import ui.VendingMachineView;
 
 import java.math.BigDecimal;
@@ -33,16 +31,16 @@ public class VendingMachineController {
 
                 if (isPossible(money, price)) {
                     dao.buyItem(selection);
-                } else {
                     BigDecimal change = getChange(money, price);
                     view.displayChange(change);
+                } else {
+                     view.displayErrorMessage("You don't have enough money!");
                 }
                 
                 String input = view.getUserInput();
 
                 switch (input) {
                     case "y":
-                        System.out.println("Ok keep going");
                         break;
                     case "n":
                         keepGoing = false;
@@ -60,7 +58,7 @@ public class VendingMachineController {
     }
 
     private boolean isPossible(BigDecimal money, BigDecimal price){
-        return (money.compareTo(price) <= 0);
+        return (money.compareTo(price) >= 0);
     }
 
     private void successfulTransaction() {
