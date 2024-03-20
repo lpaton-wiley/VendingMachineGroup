@@ -1,6 +1,6 @@
 package dao;
 
-public class NotPaidFullException {
+public class NotPaidFullException extends Exception{
 
     public NotPaidFullException(String message) {
         super(message);
