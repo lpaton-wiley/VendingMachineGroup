@@ -2,6 +2,7 @@ package ui;
 
 import dto.Item;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -13,37 +14,23 @@ public class VendingMachineView {
             this.io = io;
         }
 
-        public void printMenuAndGetSelection(Map<String, Item> inventory) {
+        public void printMenu(Map<String, Item> inventory) {
             io.print("Menu");
             io.print(inventory.toString());
-            // print items and prices
-            // ask for money amount
-            // ask for selection
-            // get result
 
         }
 
-        public void getOrder() {
-            float amount = io.readFloat("Please enter money amount:");
-            int selection = io.readInt("Please enter selection:" );
-
-            // call method that decides if possible or gets change
+        public BigDecimal getMoneyAmount() {
+            return io.readDecimal("How much money do you have?");
         }
 
-        public void displayCreateAddressBanner() {
-            io.print("=== Create Address ===");
+        public String getSelection() {
+            return io.readString("Which item do you want?");
         }
-
-        public void displayCreateSuccessBanner() {
-            io.readString(
-                    "Address successfully created.  Please hit enter to continue");
-        }
-
 
         public void displayExitBanner() {
             io.print("Good Bye!!!");
         }
-
 
         public void displayUnknownCommandBanner() {
             io.print("Unknown Command!!!");

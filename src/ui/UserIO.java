@@ -23,5 +23,5 @@ public interface UserIO {
 
     String readString(String prompt);
 
-    BigDecimal readDecimal(String prompt, BigDecimal price);
+    BigDecimal readDecimal(String prompt);
 }

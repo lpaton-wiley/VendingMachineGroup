@@ -9,13 +9,14 @@ public class VendingMachineDaoFileImpl implements VendingMachineDAO {
 
     private Map<String, Item> inventory = new HashMap<>();
 
-    public VendingMachineDaoFileImpl(){
-    }
+    public VendingMachineDaoFileImpl(){}
 
+    @Override
     public Map<String, Item> getInventory () {
         return inventory;
     }
 
+    @Override
     public void setInventory () {
         BigDecimal chipsPrice = new BigDecimal("2.50");
         chipsPrice.setScale(2);
