@@ -10,4 +10,12 @@ public class NoRemainingInventoryException extends Exception {
         super(message, cause);
     }
 
+    public NotPaidFullException(String message) {
+        super(message);
+    }
+
+    public NotPaidFullException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }
