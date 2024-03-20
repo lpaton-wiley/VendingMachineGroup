@@ -10,4 +10,5 @@ public class NoRemainingInventoryException extends Exception {
         super(message, cause);
     }
 
+
 }
