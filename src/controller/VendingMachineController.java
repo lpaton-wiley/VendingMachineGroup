@@ -3,6 +3,7 @@ package controller;
 import dao.NoRemainingInventoryException;
 import dao.VendingMachineDAO;
 import dao.VendingMachineDaoFileImpl;
+import ui.UserIOConsoleImpl;
 import ui.VendingMachineView;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ public class VendingMachineController {
 
     private VendingMachineView view;
     private VendingMachineDAO dao;
+    private UserIOConsoleImpl io;
 
     public VendingMachineController(VendingMachineView view,  VendingMachineDAO dao){
         this.dao = dao;
@@ -20,6 +22,7 @@ public class VendingMachineController {
     public void run() {
         boolean keepGoing = true;
         int menuSelection = 0;
+        String input = null;
 
         dao.setInventory();
         
@@ -39,13 +42,14 @@ public class VendingMachineController {
                     String change = getChange(money, price);
                     view.printSuccess(change);
                 }
+                input = io.readString("Go Again?");
 
-                switch (menuSelection) {
-                    case 1:
+                switch (input) {
+                    case "n":
                         System.out.println("Ok keep going");
                         break;
-                    case 2:
-                        menuSelection = 2;
+                    case "y":
+                        keepGoing = false;
                         exitMessage();
                         break;
                     default:
