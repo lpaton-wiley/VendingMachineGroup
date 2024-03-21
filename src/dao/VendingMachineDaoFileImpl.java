@@ -42,11 +42,10 @@ public class VendingMachineDaoFileImpl implements VendingMachineDAO {
         int remaining = item.getRemaining();
 
         if (remaining == 0) {
-            NoRemainingInventoryException e = new NoRemainingInventoryException("There are none of these items left - cannot purchase.");
-            throw e;
+            throw new NoRemainingInventoryException("There are none of these items left - cannot purchase.");
         }
         else {
-              item.setRemaining(remaining--);
+              item.setRemaining(remaining - 1);
               inventory.replace(itemName, item);
         }
         
