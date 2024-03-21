@@ -12,5 +12,6 @@ public interface VendingMachineDAO {
       public Map<String, Item> getInventory ();
 
       public void setInventory ();
-    
+
+      BigDecimal getPrice(String selection);
 }

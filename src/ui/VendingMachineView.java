@@ -18,8 +18,12 @@ public class VendingMachineView {
         public void printMenu(Map<String, Item> inventory) {
             io.print("Menu");
             Set<String> items = inventory.keySet();
-            for (String item: items) {
-                io.print(item + ": " + inventory.get(item).getPrice().toString());
+            for (String itemName: items) {
+                Item item = inventory.get(itemName);
+                int remaining = item.getRemaining();
+                if (!(remaining == 0)){
+                    io.print(itemName + ": " + item.getPrice().toString() + " (" + item.getRemaining() +" items left.) " );
+                }
             }
 
         }
@@ -45,12 +49,12 @@ public class VendingMachineView {
             io.print(errorMsg);
         }
 
-    public String getUserInput() {
-        return io.readString("Would you like to buy something else?");
+    public String getUserInput(String prompt) {
+        return io.readString(prompt);
     }
 
     public void displayChange(BigDecimal change) {
-        System.out.println("Change: £ " + change);
+        System.out.println("Your change is: £ " + change);
     }
 
     public void displaySuccessfulTransaction() {

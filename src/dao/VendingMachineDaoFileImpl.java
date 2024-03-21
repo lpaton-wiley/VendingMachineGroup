@@ -25,13 +25,13 @@ public class VendingMachineDaoFileImpl implements VendingMachineDAO {
         BigDecimal colaPrice = new BigDecimal("3.00") ;
         colaPrice.setScale(2);
 
-        Item chips = new Item("Chips", chipsPrice, 10);
-        Item cookies = new Item("Cookies", cookiesPrice, 4);
-        Item cola = new Item("Cola", colaPrice, 5);
+        Item chips = new Item("CHIPS", chipsPrice, 10);
+        Item cookies = new Item("COOKIES", cookiesPrice, 4);
+        Item cola = new Item("COLA", colaPrice, 0);
 
-        inventory.put("Chips", chips);
-        inventory.put("Cookies", cookies);
-        inventory.put("Cola", cola);
+        inventory.put("CHIPS", chips);
+        inventory.put("COOKIES", cookies);
+        inventory.put("COLA", cola);
 
     }
 
@@ -50,6 +50,11 @@ public class VendingMachineDaoFileImpl implements VendingMachineDAO {
               inventory.replace(itemName, item);
         }
         
+    }
+
+    @Override
+    public BigDecimal getPrice(String name){
+        return inventory.get(name).getPrice();
     }
 
 

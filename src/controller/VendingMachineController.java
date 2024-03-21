@@ -20,26 +20,30 @@ public class VendingMachineController {
         boolean keepGoing = true;
         dao.setInventory();
         
-        try {
-
-            while (keepGoing) {
+        while (keepGoing) {
 
                 view.printMenu(dao.getInventory());
                 BigDecimal money = view.getMoneyAmount();
-                String selection = view.getSelection();
-                BigDecimal price = dao.getInventory().get(selection).getPrice();
+                String selection = view.getSelection().toUpperCase();
+                BigDecimal price = dao.getPrice(selection);
 
                 if (isPossible(money, price)) {
-                    dao.buyItem(selection);
-                    BigDecimal change = getChange(money, price);
-                    view.displayChange(change);
+                    try {
+                        dao.buyItem(selection);
+                        view.displaySuccessfulTransaction();
+                        BigDecimal change = getChange(money, price);
+                        view.displayChange(change);
+                    } catch (NoRemainingInventoryException e){
+                        view.displayErrorMessage(e.getMessage());
+                    }
+
                 } else {
                      view.displayErrorMessage("You don't have enough money!");
                 }
                 
-                String input = view.getUserInput();
+                String input = view.getUserInput("Would you like anything else (Y/N)?");
 
-                switch (input) {
+                switch (input.toLowerCase()) {
                     case "y":
                         break;
                     case "n":
@@ -51,24 +55,15 @@ public class VendingMachineController {
 
             }
             exitMessage();
-        } catch (NoRemainingInventoryException e){
-            view.displayErrorMessage(e.getMessage());
-        }
-
     }
 
     private boolean isPossible(BigDecimal money, BigDecimal price){
         return (money.compareTo(price) >= 0);
     }
-
-    private void successfulTransaction() {
-        view.displaySuccessfulTransaction();
-    }
-
+    
     private BigDecimal getChange(BigDecimal money, BigDecimal price) {
         return money.subtract(price);
     }
-
 
     private void exitMessage() {
         view.displayExitBanner();
