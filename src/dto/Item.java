@@ -7,11 +7,18 @@ public class Item {
     private BigDecimal price;
     private int remaining;
 
+    public Item(String name) {
+        this.name = name;
+    }
 
     public Item(String name, BigDecimal price, int remaining) {
         this.name = name;
         this.price = price;
         this.remaining = remaining;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public String getName() {
