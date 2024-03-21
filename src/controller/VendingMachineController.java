@@ -3,6 +3,7 @@ package controller;
 import dao.NoRemainingInventoryException;
 import dao.VendingMachineDAO;
 import dao.VendingMachinePersistenceException;
+import dto.Change;
 import ui.VendingMachineView;
 
 import java.math.BigDecimal;
@@ -31,8 +32,11 @@ public class VendingMachineController {
                     try {
                         dao.buyItem(selection);
                         view.displaySuccessfulTransaction();
-                        BigDecimal change = getChange(money, price);
-                        view.displayChange(change);
+                        BigDecimal changeAmount = getChangeAmount(money, price);
+                        Change change = new Change(changeAmount.intValue());
+                        BigDecimal totalChange = change.getTotalChange();
+                        view.displayChange(totalChange);
+                        change.printChange();
                     } catch (NoRemainingInventoryException e) {
                         view.displayErrorMessage(e.getMessage());
                     }
@@ -65,7 +69,11 @@ public class VendingMachineController {
         return (money.compareTo(price) >= 0);
     }
     
-    private BigDecimal getChange(BigDecimal money, BigDecimal price) {
+  /*  private BigDecimal getChange(BigDecimal money, BigDecimal price) {
+        return money.subtract(price);
+    }*/
+
+    private BigDecimal getChangeAmount(BigDecimal money, BigDecimal price) {
         return money.subtract(price);
     }
 
